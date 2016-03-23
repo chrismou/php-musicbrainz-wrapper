@@ -1,0 +1,30 @@
+language: php
+
+sudo: false
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install
+  - mkdir -p build/logs
+
+script:
+  - bash -c 'if [ "$TRAVIS_PHP_VERSION" == "hhvm" ]; then vendor/bin/phpunit; fi;'
+  - bash -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi;'
+
+after_script:
+  - bash -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then CODECLIMATE_REPO_TOKEN=eae24ded725c5e81be9799d22bccd536a53be4e03c06ccee8d7f68eec17eccbe ./vendor/bin/test-reporter; fi;'
+
+notifications:
+  slack:
+    rooms:
+      secure: Gl2yc5wLvO583kbMkiy4WjolYj7SAbX68nwUt+RgaMVPD0PD1J1Ag0WJjHCn6b/ovlhW386vmYuDgiH/hvhPT2vq8iybly6SGLm1N3nxuH44QpqNJmewRLdSC3NXVYEcT22W8rLzhOuZXVgeXcRsjFaFDsXHMModa7yie/8EAinfH+TxfDhGwtektsD/DKFjhIRWONmxV2Zq58j4Mr3k04Ya6rIKDhj1BiOISmW0tyJjq2mf2bVFh5Zd6Xp7RFTiGEdquVr7J/Uj7yk1U0QziyuJxRyhep9JwpWZUL2hROeuf4BE2UP4SWQmxSsgsxi8FGkVb7pO7e455NpmBi9wc7AfPo28PwkV6K32WZ/mC5dEfo4HOgFjb4W/y16SkJKVrjVlUpZAsbKPCS2j1Gpi467Y90c1dfihXGrxADcTND9zU8Ie8mGbDAxU/aaym35qn75iYuoAGNAvpm5tNHCLlCXNWTM5el5jpe/Tq/Vi4tCe9FR/4EsF8eHsM5KdveT7hqUBZRPV1alhuW2JUvE/qyu4VKaBP8DE4paDRtIt+9J7q6vo+YQuC+gdXUMlijZ1S+Kg8wd6uOG7Zdp5KWOf+dzQhLCOk9sLwxKFPKIer8yewWOHGkbUc98wUbYylyAn3MNLERtBbF1N8gImAHZUE0YSwj4XTuZ+3iTACJ2IQ8o=
