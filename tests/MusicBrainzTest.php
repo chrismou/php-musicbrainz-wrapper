@@ -25,6 +25,9 @@ class MusicBrainzTest extends PHPUnit_Framework_TestCase
     /** @var string */
     protected $dummyPassword;
 
+    /** @var string */
+    protected $dummyUserAgent;
+
     /**
      * Setup the test class
      */
@@ -42,7 +45,14 @@ class MusicBrainzTest extends PHPUnit_Framework_TestCase
 
         $this->dummyPassword = 'abc123';
 
-        $this->musicbrainz = new MusicBrainz($this->mockClient, $this->dummyUsername, $this->dummyPassword);
+        $this->dummyUserAgent = 'chrismou-musicbrainz-test\1.0';
+
+        $this->musicbrainz = new MusicBrainz(
+            $this->mockClient,
+            $this->dummyUsername,
+            $this->dummyPassword,
+            $this->dummyUserAgent
+        );
     }
 
     /**
