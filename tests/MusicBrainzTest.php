@@ -62,4 +62,22 @@ class MusicBrainzTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Chrismou\MusicBrainz\MusicBrainz', $this->musicbrainz);
     }
+
+    /**
+     * @test
+     * @expectedException \Chrismou\MusicBrainz\Exception\InvalidEntityException
+     */
+    public function it_throws_exception_when_unknown_entity_is_used()
+    {
+        $this->musicbrainz->lookup('fakeEntity', '123', []);
+    }
+
+    /**
+     * @test
+     * @expectedException \Chrismou\MusicBrainz\Exception\InvalidIncludeException
+     */
+    public function it_throws_exception_when_unknown_include_is_used()
+    {
+        $this->musicbrainz->lookup('artist', '123', ['notAnInclude']);
+    }
 }

@@ -75,14 +75,16 @@ class MusicBrainz
      * @param $uri
      *
      * @return mixed
-     * @throws \Chrismou\MusicBrainz\Exception\MusicBrainzErrorException Thrown when MusicBrainz returns an error from the request
-     * @throws \Chrismou\MusicBrainz\Exception\RequestErrorException Thrown when a general request error is thrown - ie, network issues
+     * @throws \Chrismou\MusicBrainz\Exception\MusicBrainzErrorException
+     *         Thrown when MusicBrainz returns an error from the request
+     * @throws \Chrismou\MusicBrainz\Exception\RequestErrorException
+     *         Thrown when a general request error is thrown - ie, network issues
      */
-    protected function doRequest($uri)
+    protected function doRequest($uri, $method = 'GET')
     {
         try {
             $request  = $this->httpClient->request(
-                'get',
+                $method,
                 $this->buildRequestUrl($uri),
                 [
                     'headers' => [
@@ -113,5 +115,4 @@ class MusicBrainz
     {
         return $this->apiUrl . $uri . '&fmt=json';
     }
-
 }

@@ -1,12 +1,13 @@
 # PHP MusicBrainz API Wrapper
 
+### This package is being actively developed. Only the lookup method has been completely implemented.
+
 [![Build Status](https://travis-ci.org/chrismou/php-musicbrainz-wrapper.svg?branch=master)](https://travis-ci.org/chrismou/php-musicbrainz-wrapper)
 [![Test Coverage](https://codeclimate.com/github/chrismou/php-musicbrainz-wrapper/badges/coverage.svg)](https://codeclimate.com/github/chrismou/php-musicbrainz-wrapper/coverage)
 [![Code Climate](https://codeclimate.com/github/chrismou/php-musicbrainz-wrapper/badges/gpa.svg)](https://codeclimate.com/github/chrismou/php-musicbrainz-wrapper)
+[![Buy me a beer](https://img.shields.io/badge/donate-PayPal-019CDE.svg)](https://www.paypal.me/chrismou)
 
 A simple wrapper class for the MusicBrainz API.
-
-#### This is an early days version. I'd probably advise not using it just yet, as methods are liable to change without notice until I'm happy enough with it to tag a version.
 
 ## Installation
 

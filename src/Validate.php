@@ -178,7 +178,7 @@ class Validate
     public static function entity($entity)
     {
         if (!array_key_exists($entity, self::$includes)) {
-            Throw new InvalidEntityException(sprintf('The provided entity "%s" is not valid', $entity));
+            throw new InvalidEntityException(sprintf('The provided entity "%s" is not valid', $entity));
         }
     }
 
@@ -188,7 +188,7 @@ class Validate
 
         foreach ($includes as $include) {
             if (!in_array($include, self::$includes[$entity])) {
-                Throw new InvalidIncludeException(sprintf('The provided include "%s" is not valid', $include));
+                throw new InvalidIncludeException(sprintf('The provided include "%s" is not valid', $include));
             }
         }
     }
