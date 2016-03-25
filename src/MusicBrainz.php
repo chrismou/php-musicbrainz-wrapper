@@ -93,11 +93,11 @@ class MusicBrainz
                 ]
             );
             $response = $request->getBody();
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            if (isset(json_decode($e->getResponse()->getBody())->error)) {
-                throw new MusicBrainzErrorException(json_decode($e->getResponse()->getBody())->error);
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            if (json_decode($e->getResponse()->getBody())) {
+                throw new MusicBrainzErrorException(json_decode($e->getResponse()->getBody())->error, $e->getCode());
             } else {
-                throw new RequestErrorException($e->getMessage());
+                throw new RequestErrorException($e->getResponse()->getBody(), $e->getCode());
             }
         }
 
